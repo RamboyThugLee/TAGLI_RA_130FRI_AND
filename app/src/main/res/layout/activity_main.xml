@@ -4,32 +4,36 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:layout_marginTop="25dp">
 
     <EditText
         android:id="@+id/etNumber1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:hint="Enter first number"
         android:inputType="numberDecimal"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:background="@drawable/edittext_box"
+        android:layout_marginBottom="15dp"/>
 
     <EditText
         android:id="@+id/etNumber2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:hint="Enter second number"
         android:inputType="numberDecimal"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:background="@drawable/edittext_box"/>
 
     <TextView
         android:id="@+id/tvResult"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:gravity="center"
         android:text="Result"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:layout_marginTop="16dp"/>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -43,7 +47,9 @@
             android:text="+"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnSubtract" />
+            app:layout_constraintEnd_toStartOf="@+id/btnSubtract"
+            android:backgroundTint="#224354"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/btnSubtract"
@@ -52,7 +58,9 @@
             android:text="-"
             app:layout_constraintStart_toEndOf="@+id/btnAdd"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnMultiply" />
+            app:layout_constraintEnd_toStartOf="@+id/btnMultiply"
+            android:backgroundTint="#224354"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/btnMultiply"
@@ -61,7 +69,9 @@
             android:text="*"
             app:layout_constraintStart_toEndOf="@+id/btnSubtract"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btnDivide" />
+            app:layout_constraintEnd_toStartOf="@+id/btnDivide"
+            android:backgroundTint="#224354"
+            android:textColor="#FFFFFF"/>
 
         <Button
             android:id="@+id/btnDivide"
@@ -70,7 +80,9 @@
             android:text="/"
             app:layout_constraintStart_toEndOf="@+id/btnMultiply"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="#224354"
+            android:textColor="#FFFFFF"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

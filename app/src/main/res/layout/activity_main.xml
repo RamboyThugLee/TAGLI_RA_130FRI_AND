@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- EditText for adding a task -->
+    <EditText
+        android:id="@+id/editTextTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter task"
+        android:inputType="text"
+        android:background="@drawable/edittext_outline"/>
+
+    <!-- Button to add the task -->
+    <Button
+        android:id="@+id/addTaskButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Task"
+        android:background="@drawable/button_outline"
+        android:textColor="#FF9900"
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- ListView to display tasks -->
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:divider="@android:color/darker_gray"
+        android:dividerHeight="1dp" />
+</LinearLayout>

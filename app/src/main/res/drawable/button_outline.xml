@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" /> <!-- Transparent background -->
+
+    <!-- Outline/Stroke properties -->
+    <stroke
+        android:width="2dp"
+        android:color="#FF9900" /> <!-- Orange outline, adjust the color if needed -->
+
+    <!-- Rounded corners -->
+    <corners android:radius="12dp" /> <!-- Match the radius used for EditText -->
+
+    <!-- Padding inside the Button -->
+    <padding
+        android:left="10dp"
+        android:top="10dp"
+        android:right="10dp"
+        android:bottom="10dp" />
+</shape>

@@ -8,11 +8,14 @@ import android.view.animation.AnimationUtils
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tasklist.TaskAdapter
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var taskAdapter: TaskAdapter
     private val taskList = ArrayList<String>()
+    private var lastClickTime: Long = 0
+    private val doubleClickThreshold: Long = 300 // Threshold in milliseconds for double-click
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,60 +47,17 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        // Handling item clicks in the ListView (double click for edit/delete)
-        listView.setOnItemClickListener { _, _, position, _ ->
-            val selectedTask = taskList[position]
-            val dialogBuilder = AlertDialog.Builder(this)
-            dialogBuilder.setTitle("Manage Task")
-                .setMessage("What would you like to do with this task?")
-                .setPositiveButton("Edit") { _, _ ->
-                    // Show an EditText dialog to edit the task
-                    val editTaskDialog = EditText(this)
-                    editTaskDialog.setText(selectedTask)
-                    AlertDialog.Builder(this)
-                        .setTitle("Edit Task")
-                        .setView(editTaskDialog)
-                        .setPositiveButton("Save") { _, _ ->
-                            taskList[position] = editTaskDialog.text.toString()
-                            taskAdapter.notifyDataSetChanged()
-                        }
-                        .setNegativeButton("Cancel", null)
-                        .show()
-                }
-                .setNegativeButton("Delete") { _, _ ->
-                    // Delete the selected task
-                    taskList.removeAt(position)
-                    taskAdapter.notifyDataSetChanged()
-                }
-                .setNeutralButton("Cancel", null)
-                .show()
-        }
-    }
+        // Handling item clicks in the ListView (double-click for edit/delete)
+        listView.setOnItemClickListener { _, view, position, _ ->
+            val currentClickTime = System.currentTimeMillis()
+            val clickInterval = currentClickTime - lastClickTime
 
-    // Custom adapter for ListView (including ImageView and CheckBox)
-    private class TaskAdapter(context: MainActivity, private val tasks: ArrayList<String>) :
-        ArrayAdapter<String>(context, R.layout.task_item, tasks) {
-
-        override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-            val inflater = LayoutInflater.from(context) // Fix for layoutInflater
-            val rowView = inflater.inflate(R.layout.task_item, parent, false)
-
-            val taskText = rowView.findViewById<TextView>(R.id.taskText)
-            val checkBox = rowView.findViewById<CheckBox>(R.id.taskCheckBox)
-            val imageView = rowView.findViewById<ImageView>(R.id.taskImage)
-
-            taskText.text = tasks[position]
-
-            // Mark task as completed/uncompleted when checkbox is clicked
-            checkBox.setOnCheckedChangeListener { _, isChecked ->  // Fix for isChecked
-                if (isChecked) {
-                    taskText.paintFlags = taskText.paintFlags or android.graphics.Paint.STRIKE_THRU_TEXT_FLAG // Fix for paintFlags
-                } else {
-                    taskText.paintFlags = taskText.paintFlags and android.graphics.Paint.STRIKE_THRU_TEXT_FLAG.inv()
-                }
+            if (clickInterval < doubleClickThreshold) {
+                // Double click detected
+                taskAdapter.showTaskOptionsDialog(position)
             }
 
-            return rowView
+            lastClickTime = currentClickTime
         }
     }
 }

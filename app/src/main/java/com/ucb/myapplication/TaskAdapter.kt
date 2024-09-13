@@ -10,7 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import com.ucb.myapplication.R
 
 class TaskAdapter(private val context: Context, private val taskList: ArrayList<String>) :
-    ArrayAdapter<String>(context, 0, taskList) {
+    ArrayAdapter<String>(context, R.layout.task_item, taskList) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.task_item, parent, false)
@@ -38,7 +38,7 @@ class TaskAdapter(private val context: Context, private val taskList: ArrayList<
             override fun onClick(v: View?) {
                 val clickTime = System.currentTimeMillis()
                 if (clickTime - lastClickTime < 300) {
-                    showEditDeleteDialog(position)
+                    showTaskOptionsDialog(position)
                 }
                 lastClickTime = clickTime
             }
@@ -48,7 +48,8 @@ class TaskAdapter(private val context: Context, private val taskList: ArrayList<
     }
 
     // Method to show the Edit/Delete dialog
-    private fun showEditDeleteDialog(position: Int) {
+    fun showTaskOptionsDialog(position: Int) {
+        val selectedTask = taskList[position]
         val dialogView = LayoutInflater.from(context).inflate(R.layout.task_dialog, null)
         val dialog = AlertDialog.Builder(context)
             .setView(dialogView)
@@ -56,7 +57,21 @@ class TaskAdapter(private val context: Context, private val taskList: ArrayList<
 
         // Handle Edit Task button click
         dialogView.findViewById<Button>(R.id.editTaskButton).setOnClickListener {
-            // Here, implement the task editing logic (e.g., show a dialog to modify task)
+            val editTaskDialog = EditText(context).apply {
+                setText(selectedTask)
+            }
+            AlertDialog.Builder(context)
+                .setTitle("Edit Task")
+                .setView(editTaskDialog)
+                .setPositiveButton("Save") { _, _ ->
+                    val newTask = editTaskDialog.text.toString()
+                    if (newTask.isNotBlank()) {
+                        taskList[position] = newTask
+                        notifyDataSetChanged()
+                    }
+                }
+                .setNegativeButton("Cancel", null)
+                .show()
             dialog.dismiss()
         }
 

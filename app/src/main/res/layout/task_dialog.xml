@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <Button
+        android:id="@+id/editTaskButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Edit Task"
+        android:background="@drawable/button_gradient"
+        android:textColor="@color/white" />
+
+    <Button
+        android:id="@+id/deleteTaskButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete Task"
+        android:background="@drawable/button_gradient"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/white" />
+</LinearLayout>

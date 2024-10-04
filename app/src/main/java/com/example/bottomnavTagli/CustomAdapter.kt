@@ -1,97 +1,81 @@
 package com.example.bottomnavTagli
 
 import android.content.Context
+import android.graphics.Paint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 
-class CustomAdapter(
-    private val context: Context,
-    private val itemList: MutableList<ListItem>
-) : BaseAdapter() {
+class CustomAdapter(private val context: Context, private val taskList: ArrayList<String>) :
+    ArrayAdapter<String>(context, R.layout.list_item, taskList) {
 
-    override fun getCount(): Int = itemList.size
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
+        val view = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item, parent, false)
 
-    override fun getItem(position: Int): Any = itemList[position]
+        val taskTextView = view.findViewById<TextView>(R.id.taskText)
+        val checkBox = view.findViewById<CheckBox>(R.id.taskCheckBox)
+        val imageView = view.findViewById<ImageView>(R.id.taskImage)
 
-    override fun getItemId(position: Int): Long = position.toLong()
+        val task = taskList[position]
+        taskTextView.text = task
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val layoutInflater = LayoutInflater.from(context)
-        val itemView = convertView ?: layoutInflater.inflate(R.layout.list_item, parent, false)
-
-        val checkBox = itemView.findViewById<CheckBox>(R.id.checkBox)
-        val textView = itemView.findViewById<TextView>(R.id.textViewItem)
-        val imageView = itemView.findViewById<ImageView>(R.id.imageView)
-
-        val currentItem = itemList[position]
-
-        when (currentItem.type) {
-            ItemType.CHECKBOX -> {
-                checkBox.visibility = View.VISIBLE
-                imageView.visibility = View.GONE
-                textView.visibility = View.VISIBLE
-                textView.text = currentItem.text
-                checkBox.isChecked = currentItem.isChecked
-            }
-            ItemType.IMAGEVIEW -> {
-                checkBox.visibility = View.GONE
-                imageView.visibility = View.VISIBLE
-                textView.visibility = View.VISIBLE
-                textView.text = currentItem.text
-            }
-            ItemType.TEXTVIEW -> {
-                checkBox.visibility = View.GONE
-                imageView.visibility = View.GONE
-                textView.visibility = View.VISIBLE
-                textView.text = currentItem.text
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            taskTextView.paintFlags = if (isChecked) {
+                taskTextView.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+            } else {
+                taskTextView.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
             }
         }
 
-        itemView.setOnClickListener(object : View.OnClickListener {
-            private var lastTapTime: Long = 0
-            override fun onClick(v: View) {
-                val currentTapTime = System.currentTimeMillis()
-                if (currentTapTime - lastTapTime < 300) { // Double-click identified
-                    openEditOrDeleteDialog(position)
+        view.setOnClickListener(object : View.OnClickListener {
+            private var lastClickTime: Long = 0
+
+            override fun onClick(v: View?) {
+                val clickTime = System.currentTimeMillis()
+                if (clickTime - lastClickTime < 300) {
+                    showTaskOptionsDialog(position)
                 }
-                lastTapTime = currentTapTime
+                lastClickTime = clickTime
             }
         })
 
-        return itemView
+        return view
     }
 
-    private fun openEditOrDeleteDialog(position: Int) {
-        val selectedItem = itemList[position]
-        val dialogBuilder = AlertDialog.Builder(context)
-        dialogBuilder.setTitle("Modify or Remove Item")
-        dialogBuilder.setMessage("What action would you like to take for this item?")
+    fun showTaskOptionsDialog(position: Int) {
+        val selectedTask = taskList[position]
+        val dialogView = LayoutInflater.from(context).inflate(R.layout.task_dialog, null)
+        val dialog = AlertDialog.Builder(context)
+            .setView(dialogView)
+            .create()
 
-        dialogBuilder.setPositiveButton("Edit") { _, _ ->
-            // Logic for modifying the item
-            val inputField = EditText(context)
-            inputField.setText(selectedItem.text)
+        dialogView.findViewById<Button>(R.id.editTaskButton).setOnClickListener {
+            val editTaskDialog = EditText(context).apply {
+                setText(selectedTask)
+            }
             AlertDialog.Builder(context)
-                .setTitle("Update Item")
-                .setView(inputField)
-                .setPositiveButton("OK") { _, _ ->
-                    selectedItem.text = inputField.text.toString()
-                    notifyDataSetChanged()
+                .setTitle("Edit Task")
+                .setView(editTaskDialog)
+                .setPositiveButton("Save") { _, _ ->
+                    val newTask = editTaskDialog.text.toString()
+                    if (newTask.isNotBlank()) {
+                        taskList[position] = newTask
+                        notifyDataSetChanged()
+                    }
                 }
                 .setNegativeButton("Cancel", null)
                 .show()
+            dialog.dismiss()
         }
 
-        dialogBuilder.setNegativeButton("Delete") { _, _ ->
-            // Remove the selected item
-            itemList.removeAt(position)
+        dialogView.findViewById<Button>(R.id.deleteTaskButton).setOnClickListener {
+            taskList.removeAt(position)
             notifyDataSetChanged()
+            dialog.dismiss()
         }
 
-        dialogBuilder.setNeutralButton("Cancel", null)
-        dialogBuilder.show()
+        dialog.show()
     }
 }

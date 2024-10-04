@@ -1,8 +1,8 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.BottomNavTagli" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <!-- Base application theme with light mode -->
+    <style name="Base.Theme.BottomNavTagli" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your light theme here -->
+        <!-- You can define colors if necessary -->
     </style>
 
     <style name="Theme.BottomNavTagli" parent="Base.Theme.BottomNavTagli" />

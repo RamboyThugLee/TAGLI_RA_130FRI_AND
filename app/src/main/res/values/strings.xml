@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">BottomNavTagli</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="enter_text">Enter text</string>
     <string name="default_txt">Text Here</string>

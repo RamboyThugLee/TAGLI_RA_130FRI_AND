@@ -60,53 +60,56 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/rounded_edittext"
+        android:padding="16dp"
+        android:layout_marginBottom="10dp">
 
-            <CheckBox
-                android:id="@+id/sportsCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/sports" />
-
-            <CheckBox
-                android:id="@+id/gamingCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/gaming" />
-
-            <CheckBox
-                android:id="@+id/readingCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/reading" />
-
-            <CheckBox
-                android:id="@+id/musicCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/music" />
-
-            <CheckBox
-                android:id="@+id/adventureCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/adventure" />
-
-            <CheckBox
-                android:id="@+id/moviesCheckBox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/movies" />
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/saveButton"
+        <CheckBox
+            android:id="@+id/sportsCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/save"
-            android:background="@drawable/rounded_edittext"
-            android:textColor="@android:color/white"
-            android:padding="8dp"
-            android:layout_marginTop="16dp" />
+            android:text="@string/sports" />
+
+        <CheckBox
+            android:id="@+id/gamingCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gaming" />
+
+        <CheckBox
+            android:id="@+id/readingCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reading" />
+
+        <CheckBox
+            android:id="@+id/musicCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/music" />
+
+        <CheckBox
+            android:id="@+id/adventureCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/adventure" />
+
+        <CheckBox
+            android:id="@+id/moviesCheckBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movies" />
     </LinearLayout>
-</ScrollView>
+
+    <Button
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:background="@drawable/rounded_edittext"
+        android:textColor="@android:color/white"
+        android:padding="8dp"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
+    </ScrollView>

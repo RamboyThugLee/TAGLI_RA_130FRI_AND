@@ -1,0 +1,32 @@
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/more"
+        android:title="@string/more"
+        app:showAsAction="always">
+        <menu>
+        <item
+            android:id="@+id/menu_first"
+            android:title="@string/MI1"
+            android:icon="@drawable/firsticon"/>
+
+        <item
+            android:id="@+id/menu_second"
+            android:title="@string/MI2"
+            android:icon="@drawable/secondicon"/>
+
+        <item
+            android:id="@+id/submenu_exit"
+            android:title="@string/exit"
+            android:icon="@drawable/thirdicon">
+        <menu>
+            <item
+                android:id="@+id/exit_confirmation"
+                android:title="@string/confirm_exit"
+                android:icon="@drawable/thirdicon" />
+        </menu>
+    </item>
+</menu>
+    </item>
+    </menu>

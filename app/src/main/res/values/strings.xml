@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">BottomNavTagli</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="enter_text">Enter text</string>
+    <string name="default_txt">Text Here</string>
+    <string name="hint1">Enter first number</string>
+    <string name="hint2">Enter second number</string>
+    <string name="plus_button">+</string>
+    <string name="minus_btn">-</string>
+    <string name="times_btn">*</string>
+    <string name="divide_btn">/</string>
+    <string name="result">Result:</string>
+    <string name="add">Add</string>
+    <string name="save">Save</string>
+    <string name="movies">Movies</string>
+    <string name="adventure">Adventure</string>
+    <string name="music">Music</string>
+    <string name="reading">Reading</string>
+    <string name="gaming">Gaming</string>
+    <string name="sports">Sports</string>
+    <string name="hobbies">Hobbies</string>
+    <string name="female">Female</string>
+    <string name="male">Male</string>
+    <string name="gender">Gender</string>
+    <string name="address">Address</string>
+    <string name="name">Name</string>
+</resources>

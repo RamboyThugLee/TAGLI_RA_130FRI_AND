@@ -4,6 +4,15 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:background="#f7f7f7">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="News Headline"
+        android:layout_gravity="center"
+        android:fontFamily="arial"
+        android:textSize="30sp"
+        android:layout_marginBottom="10dp"
+        />
 
     <ListView
         android:id="@+id/newsListView"
